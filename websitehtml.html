@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kiarash Firouzi, Ph.D. | Financial Mathematics & Blockchain Systems</title>
+  <style>
+    /* --- Math & Crypto Slate Palette --- */
+    :root {
+      --bg-dark: #0f172a;        /* Deep Slate Blue */
+      --bg-main: #f8fafc;        /* Light Slate Background */
+      --bg-card: rgba(255, 255, 255, 0.96);
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --primary: #1e3a8a;        /* Deep Navy */
+      --primary-accent: #2563eb;  /* Accent Blue */
+      --crypto-accent: #0284c7;   /* Cyan Accent */
+      --border-color: #e2e8f0;
+      --tag-bg: #eff6ff;
+      --tag-text: #1e40af;
+      --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.04);
+      --shadow-md: 0 10px 25px -5px rgba(30, 58, 138, 0.1);
+      --radius: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* --- Sticky Navigation Bar --- */
+    header {
+      position: sticky;
+      top: 0;
+      background-color: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      z-index: 1000;
+    }
+
+    .nav-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0.85rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      font-weight: 800;
+      font-size: 1.15rem;
+      color: var(--primary);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 1.25rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-weight: 600;
+      font-size: 0.875rem;
+      transition: color 0.2s ease;
+    }
+
+    nav a:hover {
+      color: var(--primary-accent);
+    }
+
+    /* --- Animated Mathematical & Crypto Cover Banner --- */
+    .hero-banner {
+      position: relative;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 60%, #0369a1 100%);
+      color: #ffffff;
+      padding: 3rem 1.5rem 5rem 1.5rem;
+      overflow: hidden;
+    }
+
+    /* Mathematical Overlay Pattern */
+    .hero-banner::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 0);
+      background-size: 28px 28px;
+      opacity: 0.5;
+    }
+
+    .bg-math-floating {
+      position: absolute;
+      top: 20%;
+      right: 5%;
+      font-family: monospace;
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.2);
+      letter-spacing: 2px;
+      pointer-events: none;
+      animation: floatNodes 8s ease-in-out infinite alternate;
+    }
+
+    @keyframes floatNodes {
+      0% { transform: translateY(0px) rotate(0deg); }
+      100% { transform: translateY(-15px) rotate(1deg); }
+    }
+
+    .banner-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .banner-title {
+      font-size: 2.4rem;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-top: 0.3rem;
+      letter-spacing: -0.02em;
+    }
+
+    .banner-badge {
+      font-family: monospace;
+      font-size: 0.85rem;
+      color: #38bdf8;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    /* --- Container Spacing --- */
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 3rem 1.5rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    /* --- Smooth Fade-In Scroll Reveal Animations --- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px) scale(0.98);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    /* --- Hero Profile Card --- */
+    .hero-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 2.25rem;
+      box-shadow: var(--shadow-md);
+      margin-top: -2.5rem;
+      margin-bottom: 2.5rem;
+      display: flex;
+      gap: 2.25rem;
+      align-items: center;
+      backdrop-filter: blur(8px);
+    }
+
+    .profile-photo {
+      width: 180px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 4px solid #ffffff;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+      flex-shrink: 0;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .profile-photo:hover {
+      transform: scale(1.04);
+      box-shadow: 0 12px 25px rgba(37, 99, 235, 0.25);
+    }
+
+    .hero-content {
+      flex: 1;
+    }
+
+    .hero-subtitle {
+      font-size: 1.05rem;
+      color: var(--crypto-accent);
+      font-weight: 700;
+      margin-bottom: 0.85rem;
+    }
+
+    .hero-bio {
+      color: var(--text-main);
+      font-size: 0.95rem;
+      margin-bottom: 1.2rem;
+    }
+
+    /* Academic Metrics Grid */
+    .metrics-bar {
+      display: flex;
+      gap: 0.85rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .metric-box {
+      background: var(--bg-main);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 0.5rem 0.9rem;
+      text-align: center;
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+
+    .metric-box:hover {
+      transform: translateY(-3px);
+      border-color: var(--primary-accent);
+    }
+
+    .metric-value {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .metric-label {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .social-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .btn-link {
+      display: inline-flex;
+      padding: 0.45rem 0.95rem;
+      background: var(--primary);
+      color: #ffffff;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn-link:hover {
+      background: var(--primary-accent);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+    }
+
+    /* --- Sections --- */
+    section {
+      margin-bottom: 3.5rem;
+    }
+
+    .section-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 2px solid var(--border-color);
+    }
+
+    /* Filter Buttons for Publications */
+    .filter-bar {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .filter-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      padding: 0.4rem 0.9rem;
+      border-radius: 6px;
+      font-size: 0.825rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    /* --- Research Tags --- */
+    .grid-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .tag {
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      padding: 0.45rem 0.9rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border: 1px solid rgba(37, 99, 235, 0.15);
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .tag:hover {
+      transform: translateY(-3px);
+      background: #dbeafe;
+    }
+
+    /* --- Core Focus Cards --- */
+    .highlight-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .highlight-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+
+    .highlight-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--primary-accent);
+    }
+
+    .highlight-icon {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .highlight-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.4rem;
+    }
+
+    .highlight-desc {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    /* --- Publications List --- */
+    .paper-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 1.35rem 1.6rem;
+      margin-bottom: 1rem;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .paper-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .paper-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .paper-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.35;
+    }
+
+    .paper-status {
+      font-size: 0.725rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 0.25rem 0.55rem;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+
+    .status-published {
+      background: #dcfce7;
+      color: #15803d;
+    }
+
+    .status-review {
+      background: #fef3c7;
+      color: #b45309;
+    }
+
+    .paper-journal {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-style: italic;
+      margin-bottom: 0.4rem;
+    }
+
+    .paper-authors {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    summary {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--primary-accent);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    pre {
+      background: var(--bg-main);
+      border: 1px solid var(--border-color);
+      padding: 0.75rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      margin-top: 0.5rem;
+      overflow-x: auto;
+      font-family: monospace;
+    }
+
+    /* --- Technical Skills Matrix --- */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+
+    .skill-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1rem 1.2rem;
+      transition: transform 0.2s ease;
+    }
+
+    .skill-box:hover {
+      transform: translateY(-3px);
+    }
+
+    .skill-category {
+      font-size: 0.825rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+
+    .skill-list {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    /* --- Timeline --- */
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .timeline-item {
+      background: var(--bg-card);
+      border-left: 4px solid var(--primary-accent);
+      border-top: 1px solid var(--border-color);
+      border-right: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.2rem 1.5rem;
+      transition: transform 0.25s ease;
+    }
+
+    .timeline-item:hover {
+      transform: translateX(4px);
+    }
+
+    .timeline-year {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--primary-accent);
+      text-transform: uppercase;
+      margin-bottom: 0.2rem;
+    }
+
+    .timeline-role {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .timeline-org {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+    }
+
+    .timeline-desc {
+      font-size: 0.875rem;
+      color: var(--text-main);
+    }
+
+    /* --- Contact Me Section Styles --- */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 1.5rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 2rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .contact-info-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.85rem;
+    }
+
+    .contact-icon {
+      font-size: 1.25rem;
+      background: var(--tag-bg);
+      padding: 0.5rem;
+      border-radius: 8px;
+    }
+
+    .contact-detail-title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .contact-detail-text {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-main);
+      text-decoration: none;
+    }
+
+    .contact-detail-text:hover {
+      color: var(--primary-accent);
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .form-group label {
+      font-size: 0.825rem;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 0.65rem 0.85rem;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 0.9rem;
+      background: var(--bg-main);
+      color: var(--text-main);
+      transition: border-color 0.2s ease, outline 0.2s ease;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--primary-accent);
+      background: #ffffff;
+    }
+
+    textarea.form-control {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .btn-submit {
+      background: var(--primary);
+      color: #ffffff;
+      padding: 0.75rem 1.2rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .btn-submit:hover {
+      background: var(--primary-accent);
+      transform: translateY(-2px);
+    }
+
+    /* --- Footer --- */
+    footer {
+      border-top: 1px solid var(--border-color);
+      background: var(--bg-card);
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      margin-top: 4rem;
+    }
+
+    @media (max-width: 768px) {
+      .hero-banner {
+        padding-bottom: 4rem;
+      }
+      .hero-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 1.75rem;
+        margin-top: -1.5rem;
+      }
+      .metrics-bar, .social-links {
+        justify-content: center;
+      }
+      .nav-container {
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+      .paper-header {
+        flex-direction: column;
+        gap: 0.3rem;
+      }
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header>
+    <div class="nav-container">
+      <a href="#" class="brand">Kiarash Firouzi</a>
+      <nav>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#focus">Focus Areas</a></li>
+          <li><a href="#publications">Publications</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#teaching">Teaching</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Mathematical & Crypto Header Cover -->
+  <div class="hero-banner">
+    <div class="bg-math-floating">
+      ∫ dx • E[X] • dSt • XRPL • ∂f/∂t
+    </div>
+    <div class="banner-container">
+      <p class="banner-badge">QUANTITATIVE FINANCE • LOG-ERGODIC THEORY • XRPL DEFI ARCHITECTURE</p>
+      <h1 class="banner-title">Kiarash Firouzi, Ph.D.</h1>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <!-- Hero Profile Card -->
+    <section id="about" class="hero-card reveal">
+      <img src="1771105994523.jpg" alt="Kiarash Firouzi" class="profile-photo" />
+      <div class="hero-content">
+        <p class="hero-subtitle">Ph.D. in Financial Mathematics | Founder & CFO at Kladia | CEO at KapitalFusion</p>
+        
+        <p class="hero-bio">
+          Academic researcher and executive specializing in stochastic processes, log-ergodic theory, macroeconomic velocity modeling, and decentralized financial infrastructures (Ripple XRP Ledger). Founder & CFO at Kladia (Stockholm), CEO at KapitalFusion, and Visiting Professor at Sharif University of Technology (International Campus).
+        </p>
+
+        <!-- Academic & Industry Metrics -->
+        <div class="metrics-bar">
+          <div class="metric-box">
+            <div class="metric-value">8+</div>
+            <div class="metric-label">Publications</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-value">4 Journals</div>
+            <div class="metric-label">Review Board</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-value">XRPL</div>
+            <div class="metric-label">Protocol Research</div>
+          </div>
+        </div>
+
+        <!-- External Profile Links -->
+        <div class="social-links">
+          <a href="Curriculum_Vitae.pdf" download class="btn-link">📄 Download CV</a>
+          <a href="https://www.linkedin.com/in/kiarash-firouzi-238059190/" target="_blank" class="btn-link">LinkedIn Profile</a>
+          <a href="https://scholar.google.com" target="_blank" class="btn-link">Google Scholar</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Core Scientific Focus Areas -->
+    <section id="focus" class="reveal">
+      <h2 class="section-title">Core Scientific & Technical Contributions</h2>
+      <div class="highlight-grid">
+        
+        <div class="highlight-card">
+          <div class="highlight-icon">📈</div>
+          <h3 class="highlight-title">Log-Ergodic Stochastic Processes</h3>
+          <p class="highlight-desc">Formulated novel log-ergodic stochastic process frameworks applied to monetary velocity, ergodic futures trading, and call option pricing.</p>
+        </div>
+
+        <div class="highlight-card">
+          <div class="highlight-icon">⛓️</div>
+          <h3 class="highlight-title">Ripple XRP Ledger Protocols</h3>
+          <p class="highlight-desc">Architected debt-indexed token models (KLD) and cross-border settlement optimization mechanisms on the XRP Ledger.</p>
+        </div>
+
+        <div class="highlight-card">
+          <div class="highlight-icon">🎲</div>
+          <h3 class="highlight-title">Crypto Risk & Monte Carlo Simulation</h3>
+          <p class="highlight-desc">Designed simulation-based quantitative frameworks for crypto portfolios integrating volatility, hedging dynamics, contagion, and Monte Carlo engines.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Research Tags -->
+    <section id="research" class="reveal">
+      <h2 class="section-title">Research Interests</h2>
+      <div class="grid-tags">
+        <span class="tag">Quantitative Finance</span>
+        <span class="tag">Financial Mathematics</span>
+        <span class="tag">Log-Ergodic Processes</span>
+        <span class="tag">Ripple XRP Ledger (XRPL)</span>
+        <span class="tag">Crypto Currencies & DeFi</span>
+        <span class="tag">Stochastic Modeling</span>
+        <span class="tag">Dynamical Systems</span>
+        <span class="tag">Data Science & Machine Learning</span>
+        <span class="tag">Macroeconomic Velocity</span>
+      </div>
+    </section>
+
+    <!-- Publications Section -->
+    <section id="publications" class="reveal">
+      <h2 class="section-title">Publications & Academic Research</h2>
+
+      <div class="filter-bar">
+        <button class="filter-btn active" onclick="filterPapers('all')">All Papers</button>
+        <button class="filter-btn" onclick="filterPapers('published')">Published</button>
+        <button class="filter-btn" onclick="filterPapers('review')">Under Review</button>
+      </div>
+
+      <!-- Paper 1 -->
+      <div class="paper-card published">
+        <div class="paper-header">
+          <h3 class="paper-title">Log-Ergodic Dynamics in Stochastic Monetary Velocity: Theoretical Insights and Economic Implications</h3>
+          <span class="paper-status status-published">Published (2025)</span>
+        </div>
+        <p class="paper-journal">Computational Economics</p>
+        <p class="paper-authors">Authors: <strong>K. Firouzi</strong>, M. Jelodari Mamaghani</p>
+        <details>
+          <summary>BibTeX Reference</summary>
+          <pre>@article{firouzi2025log,
+  title={Log-Ergodic Dynamics in Stochastic Monetary Velocity: Theoretical Insights and Economic Implications},
+  author={Firouzi, Kiarash and Mamaghani, Mohammad Jelodari},
+  journal={Computational Economics},
+  year={2025}
+}</pre>
+        </details>
+      </div>
+
+      <!-- Paper 2 -->
+      <div class="paper-card published">
+        <div class="paper-header">
+          <h3 class="paper-title">Quantifying Crypto Portfolio Risk: A Simulation-Based Framework Integrating Volatility, Hedging, Contagion, and Monte Carlo Modeling</h3>
+          <span class="paper-status status-published">Published (2025)</span>
+        </div>
+        <p class="paper-journal">Statistics, Optimization & Information Computing</p>
+        <p class="paper-authors">Author: <strong>K. Firouzi</strong></p>
+      </div>
+
+      <!-- Paper 3 -->
+      <div class="paper-card published">
+        <div class="paper-header">
+          <h3 class="paper-title">Stochastic Dynamics of Ripple XRP for Cross-Border Settlement Optimization</h3>
+          <span class="paper-status status-published">Published (2025)</span>
+        </div>
+        <p class="paper-journal">Journal of Mathematics and Modeling in Finance (JMMF)</p>
+        <p class="paper-authors">Author: <strong>K. Firouzi</strong></p>
+      </div>
+
+      <!-- Paper 4 -->
+      <div class="paper-card published">
+        <div class="paper-header">
+          <h3 class="paper-title">A Tokenized Sovereign Debt Conversion Mechanism for Dynamic Public Debt Reduction</h3>
+          <span class="paper-status status-published">Published (2025)</span>
+        </div>
+        <p class="paper-journal">Statistics, Optimization & Information Computing</p>
+        <p class="paper-authors">Author: <strong>K. Firouzi</strong></p>
+      </div>
+
+      <!-- Paper 5 -->
+      <div class="paper-card published">
+        <div class="paper-header">
+          <h3 class="paper-title">Log-ergodicity: A New Concept for Modeling Financial Markets</h3>
+          <span class="paper-status status-published">Published (2024)</span>
+        </div>
+        <p class="paper-journal">Statistics, Optimization & Information Computing</p>
+        <p class="paper-authors">Authors: <strong>K. Firouzi</strong>, M. Jelodari Mamaghani</p>
+      </div>
+
+      <!-- Paper 6 -->
+      <div class="paper-card published">
+        <div class="paper-header">
+          <h3 class="paper-title">Some Applications of Log-Ergodic Processes: Ergodic Trading Model and Call Option Pricing Using the Irrational Rotation</h3>
+          <span class="paper-status status-published">Published (2024)</span>
+        </div>
+        <p class="paper-journal">Journal of Mathematics and Modeling in Finance (JMMF)</p>
+        <p class="paper-authors">Authors: <strong>K. Firouzi</strong>, M. Jelodari Mamaghani</p>
+      </div>
+
+      <!-- Under Review Paper 1 -->
+      <div class="paper-card review">
+        <div class="paper-header">
+          <h3 class="paper-title">Kladia Liquidity Deflator (KLD): A Debt-Indexed Deflationary Token on XRPL</h3>
+          <span class="paper-status status-review">Under Review (2026)</span>
+        </div>
+        <p class="paper-authors">Authors: <strong>K. Firouzi</strong>, P. Pajouhi</p>
+      </div>
+
+      <!-- Under Review Paper 2 -->
+      <div class="paper-card review">
+        <div class="paper-header">
+          <h3 class="paper-title">Global Macro-Stochastic Stability: A Jump-Diffusion Log-Ergodic Framework for Monetary Velocity</h3>
+          <span class="paper-status status-review">Under Review (2026)</span>
+        </div>
+        <p class="paper-authors">Author: <strong>K. Firouzi</strong></p>
+      </div>
+
+    </section>
+
+    <!-- Work Experience & Executive Appointments -->
+    <section id="experience" class="reveal">
+      <h2 class="section-title">Work Experience & Executive Appointments</h2>
+      <div class="timeline">
+        
+        <div class="timeline-item">
+          <div class="timeline-year">Dec 2025 – Present</div>
+          <div class="timeline-role">Founder & Chief Financial Officer (CFO)</div>
+          <div class="timeline-org">Kladia — Stockholm, Sweden</div>
+          <p class="timeline-desc">Leading financial architecture and strategic quantitative modeling for decentralized protocol innovations and debt-indexed token models.</p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-year">Jan 2025 – Present</div>
+          <div class="timeline-role">Chief Executive Officer (CEO)</div>
+          <div class="timeline-org">KapitalFusion — Full-time</div>
+          <p class="timeline-desc">Directing overall executive vision, quantitative asset management strategies, and capital allocation models.</p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-year">Apr 2021 – Present</div>
+          <div class="timeline-role">Investor</div>
+          <div class="timeline-org">Self-employed</div>
+          <p class="timeline-desc">Managing active investments across digital assets, early-stage financial technologies, and quantitative market strategies.</p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-year">2024 – Present</div>
+          <div class="timeline-role">Peer Reviewer & Academic Board Member</div>
+          <div class="timeline-org">Computational Economics | JMMF | Global Open Share Publishing (GOSP)</div>
+          <p class="timeline-desc">Evaluating high-impact scientific submissions in financial mathematics, stochastic processes, and computational finance.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Technical Skills Matrix -->
+    <section id="skills" class="reveal">
+      <h2 class="section-title">Technical Skills</h2>
+      <div class="skills-grid">
+        <div class="skill-box">
+          <div class="skill-category">Advanced Modeling</div>
+          <div class="skill-list">MATLAB, Maple, C/C++, LaTeX</div>
+        </div>
+        <div class="skill-box">
+          <div class="skill-category">Data Science & Code</div>
+          <div class="skill-list">Python, Machine Learning, MS Visual Studio</div>
+        </div>
+        <div class="skill-box">
+          <div class="skill-category">Blockchain & Design</div>
+          <div class="skill-list">XRP Ledger Protocols, Crypto Wallets, Adobe Suite</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Teaching Experience Section -->
+    <section id="teaching" class="reveal">
+      <h2 class="section-title">Teaching Experience</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-year">Sept 2022 – Present</div>
+          <div class="timeline-role">Visiting Professor</div>
+          <div class="timeline-org">Sharif University of Technology (International Campus, Kish Island)</div>
+          <p class="timeline-desc">
+            Lectures delivered fully in English: Calculus I & II, Engineering Probability & Statistics, Engineering Mathematics, Numerical Analysis, Ordinary Differential Equations (ODE), Queueing Theory & Applications, Design & Analysis of Algorithms, and Linear Algebra.
+          </p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2018 – 2019</div>
+          <div class="timeline-role">Teaching Assistant</div>
+          <div class="timeline-org">Shahid Beheshti University (SBU) — Fundamentals of Dynamical Systems</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education & Scholarships -->
+    <section id="education" class="reveal">
+      <h2 class="section-title">Education & Full Scholarships</h2>
+      <div class="timeline">
+        
+        <div class="timeline-item">
+          <div class="timeline-year">2019 – 2025</div>
+          <div class="timeline-role">Ph.D. in Financial Mathematics</div>
+          <div class="timeline-org">Allameh Tabataba’i University (ATU), Tehran — Full Scholarship</div>
+          <p class="timeline-desc"><strong>Thesis:</strong> Ergodic theory approach to futures trading and option pricing.</p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-year">2016 – 2018</div>
+          <div class="timeline-role">M.Sc. in Pure Mathematics (Geometry)</div>
+          <div class="timeline-org">Shahid Beheshti University (SBU), Tehran — Full Scholarship</div>
+          <p class="timeline-desc"><strong>Thesis:</strong> Ergodic Optimization of Prevalent Super Continuous Functions.</p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-year">2011 – 2016</div>
+          <div class="timeline-role">B.Sc. in Mathematics and Applications</div>
+          <div class="timeline-org">Shahid Beheshti University (SBU), Tehran — Full Scholarship</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Dedicated Contact Me Section -->
+    <section id="contact" class="reveal">
+      <h2 class="section-title">Contact Me</h2>
+      <div class="contact-grid">
+        
+        <!-- Contact Direct Details -->
+        <div class="contact-info-list">
+          <div class="contact-item">
+            <div class="contact-icon">🎓</div>
+            <div>
+              <div class="contact-detail-title">Academic Email</div>
+              <a href="mailto:k_firouzi@atu.ac.ir" class="contact-detail-text">k_firouzi@atu.ac.ir</a>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">🏢</div>
+            <div>
+              <div class="contact-detail-title">Corporate Email</div>
+              <a href="mailto:kiarash.firouzi@kladia.com" class="contact-detail-text">kiarash.firouzi@kladia.com</a>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">📱</div>
+            <div>
+              <div class="contact-detail-title">Phone / Mobile</div>
+              <a href="tel:+989123431295" class="contact-detail-text">+98 912 343 1295</a>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">🌐</div>
+            <div>
+              <div class="contact-detail-title">LinkedIn Profile</div>
+              <a href="https://www.linkedin.com/in/kiarash-firouzi-238059190/" target="_blank" class="contact-detail-text">in/kiarash-firouzi</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Interactive Message Form -->
+        <form class="contact-form" action="mailto:k_firouzi@atu.ac.ir" method="post" enctype="text/plain">
+          <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="Name" class="form-control" placeholder="Dr. / Mr. / Ms. ..." required />
+          </div>
+          <div class="form-group">
+            <label for="email">Your Email</label>
+            <input type="email" id="email" name="Email" class="form-control" placeholder="name@institution.com" required />
+          </div>
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" name="Subject" class="form-control" placeholder="Research Inquiry / Collaboration" required />
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="Message" class="form-control" placeholder="Write your message here..."></textarea>
+          </div>
+          <button type="submit" class="btn-submit">Send Message</button>
+        </form>
+
+      </div>
+    </section>
+
+  </div>
+
+  <footer>
+    <p>&copy; 2026 Kiarash Firouzi. All rights reserved.</p>
+  </footer>
+
+  <!-- Interactive Filter & Intersection Observer Fade-In Scripts -->
+  <script>
+    // Publication Filter
+    function filterPapers(category) {
+      const cards = document.querySelectorAll('.paper-card');
+      const buttons = document.querySelectorAll('.filter-btn');
+
+      buttons.forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+
+      cards.forEach(card => {
+        if (category === 'all') {
+          card.style.display = 'block';
+        } else if (card.classList.contains(category)) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // Intersection Observer for Smooth Fade-In Scroll Animations
+    document.addEventListener("DOMContentLoaded", function () {
+      const reveals = document.querySelectorAll(".reveal");
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("active");
+          }
+        });
+      }, {
+        threshold: 0.08,
+        rootMargin: "0px 0px -50px 0px"
+      });
+
+      reveals.forEach((reveal) => {
+        observer.observe(reveal);
+      });
+    });
+  </script>
+
+</body>
+</html>
